@@ -1,0 +1,2 @@
+pub upgrade
+./generate.sh
