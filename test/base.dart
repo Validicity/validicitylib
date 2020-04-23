@@ -5,7 +5,7 @@ ValidicityServerAPI client =
     ValidicityServerAPI('city.validi.client', server: 'test.validi.city');
 
 User user;
-var unit;
+var sample;
 
 loginValidicity1() async {
   return await login('validicity1', 'gurka');
