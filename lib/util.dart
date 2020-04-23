@@ -25,7 +25,7 @@ String enumString(dynamic type) {
 }
 
 /// Return an SampleState value from its name as a String
-SampleState unitStateFromString(String str) {
+SampleState sampleStateFromString(String str) {
   var match = "SampleState.$str";
   return SampleState.values.firstWhere((e) => e.toString() == match);
 }
