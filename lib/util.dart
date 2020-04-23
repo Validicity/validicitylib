@@ -21,6 +21,12 @@ String enumString(dynamic type) {
   return type.toString().split(".").last;
 }
 
+/// Return an SampleState value from its name as a String
+SampleState unitStateFromString(String str) {
+  var match = "SampleState.$str";
+  return SampleState.values.firstWhere((e) => e.toString() == match);
+}
+
 /// Return a random hex of <len> bytes
 String randomHex(int len) {
   var rng = new Random();
