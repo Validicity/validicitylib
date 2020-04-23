@@ -1,10 +1,8 @@
 import 'package:validicitylib/model/project.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:validicitylib/util.dart';
 
 part 'user.g.dart';
-
-/// The different User types. admin can do anything.
-enum UserType { admin, validicityclient, user }
 
 @JsonSerializable()
 class User {
