@@ -1,6 +1,21 @@
 import 'dart:math';
 import 'package:convert/convert.dart';
 
+/// The different LifeCycle states of a Sample.
+enum SampleState {
+  /// Sample is registered but unused
+  registered,
+
+  /// Sample is assigned to a Project
+  assigned,
+
+  /// Sample is in use
+  used,
+
+  /// Sample is destructed
+  destructed
+}
+
 /// Return just the short name of an enum member
 String enumString(dynamic type) {
   return type.toString().split(".").last;
