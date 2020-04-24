@@ -34,7 +34,7 @@ class User {
 
   /// Test User type
   bool get isAdmin => type == UserType.admin;
-  bool get isValidicityclient => type == UserType.validicityclient;
+  bool get isValidicityclient => type == UserType.client;
   bool get isUser => type == UserType.user;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

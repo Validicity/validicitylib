@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:convert/convert.dart';
 
-/// The different User types. admin can do anything.
-enum UserType { admin, validicityclient, user }
+/// The different User types. admin can do anything, client is a machine, user is a normal user.
+enum UserType { admin, client, user, superuser }
 
 /// The different LifeCycle states of a Sample.
 enum SampleState {

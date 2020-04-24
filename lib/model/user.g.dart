@@ -68,6 +68,7 @@ T _$enumDecodeNullable<T>(
 
 const _$UserTypeEnumMap = {
   UserType.admin: 'admin',
-  UserType.validicityclient: 'validicityclient',
+  UserType.client: 'client',
   UserType.user: 'user',
+  UserType.superuser: 'superuser',
 };
