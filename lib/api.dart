@@ -170,6 +170,13 @@ class ValidicityServerAPI {
     }
   }
 
+  /// Bootstrap server
+  Future<Map<String, dynamic>> boostrap(dynamic payload) async {
+    _initializeClient();
+    var response = await client.doPost('bootstrap', payload, auth: false);
+    return _handleResult(response);
+  }
+
   /// Login to Validicity and return true on success.
   Future<bool> login() async {
     try {
@@ -187,6 +194,13 @@ class ValidicityServerAPI {
       await client.logout();
       client = null;
     }
+  }
+
+  /// Register generated public key for a client
+  Future<Map<String, dynamic>> register(String publicKey, String id) async {
+    _initializeClient();
+    var response = await client.doPost('client/$id/register/$publicKey', null);
+    return _handleResult(response);
   }
 
   /// Fetch status of Validicity system, looks something like:

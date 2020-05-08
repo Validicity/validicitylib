@@ -15,6 +15,15 @@ Logger log;
 // Can we hold it on package level?
 ValidicitylibConfiguration config;
 
+/// Return a File from home directory
+File fileInHome(String name) {
+  var home = (Platform.operatingSystem == 'windows')
+      ? Platform.environment['APPDATA']
+      : Platform.environment['HOME'];
+  var p = path.join(home, name);
+  return File(p);
+}
+
 /// Configure logging and read the configuration. In Flutter we supply it
 /// as a String, on other platforms as a filename.
 configure(String appName, String yaml, String filename) {
@@ -23,25 +32,20 @@ configure(String appName, String yaml, String filename) {
   } else {
     log = Logger(appName);
 
-    // Different logic, sigh
-    var home = (Platform.operatingSystem == 'windows')
-        ? Platform.environment['APPDATA']
-        : Platform.environment['HOME'];
-    var configPath = path.join(home, filename);
-    var f = File(configPath);
+    var f = fileInHome(filename);
     if (f.existsSync()) {
       try {
         var yamlContent = f.readAsStringSync();
         config = checkedYamlDecode(
             yamlContent, (m) => ValidicitylibConfiguration.fromJson(m),
-            sourceUrl: configPath);
-        config.path = configPath;
+            sourceUrl: f.path);
+        config.path = f.path;
       } catch (e) {
-        print('Failed to parse config file $configPath : $e');
+        print('Failed to parse config file ${f.path} : $e');
         exit(1);
       }
     } else {
-      print('Missing configuration file $configPath');
+      print('Missing configuration file ${f.path}');
       exit(1);
     }
     var configLevel = config.logging.level.toLowerCase();
