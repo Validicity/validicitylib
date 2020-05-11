@@ -171,7 +171,7 @@ class ValidicityServerAPI {
   }
 
   /// Bootstrap server
-  Future<Map<String, dynamic>> boostrap(dynamic payload) async {
+  Future<Map<String, dynamic>> bootstrap(dynamic payload) async {
     _initializeClient();
     var response = await client.doPost('bootstrap', payload, auth: false);
     return _handleResult(response);
@@ -197,9 +197,9 @@ class ValidicityServerAPI {
   }
 
   /// Register generated public key for a client
-  Future<Map<String, dynamic>> register(String publicKey, String id) async {
+  Future<Map<String, dynamic>> register(String publicKey) async {
     _initializeClient();
-    var response = await client.doPost('client/$id/register/$publicKey', null);
+    var response = await client.doPost('key/$publicKey', null);
     return _handleResult(response);
   }
 
