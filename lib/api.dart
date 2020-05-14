@@ -105,6 +105,13 @@ class ValidicityServerAPI {
 
   RestClient client;
 
+  RestClient getClient() {
+    if (client == null) {
+      _initializeClient();
+    }
+    return client;
+  }
+
   void _initializeClient() {
     if (client == null) {
       client = RestClient(credentialsHolder, clientID, "https://$_server/rpc",
