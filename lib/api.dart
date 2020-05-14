@@ -134,7 +134,7 @@ class ValidicityServerAPI {
 
   /// Called by all API methods to properly throw ValidicityException
   /// depending on result. null is returned for a 404.
-  T _handleResult<T>(http.Response response) {
+  T handleResult<T>(http.Response response) {
     if (response == null) {
       throw ValidicityServerException(
           ValidicityServerError.error_internal_error,
@@ -181,7 +181,7 @@ class ValidicityServerAPI {
   Future<Map<String, dynamic>> bootstrap(dynamic payload) async {
     _initializeClient();
     var response = await client.doPost('bootstrap', payload, auth: false);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Login to Validicity and return true on success.
@@ -207,7 +207,7 @@ class ValidicityServerAPI {
   Future<Map<String, dynamic>> register(String publicKey) async {
     _initializeClient();
     var response = await client.doPost('key/$publicKey', null);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Fetch status of Validicity system, looks something like:
@@ -223,21 +223,21 @@ class ValidicityServerAPI {
   Future<Map<String, dynamic>> status() async {
     _initializeClient();
     var response = await client.doGet('status');
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Get information about myself, my own user
   Future<User> getMyself(String username) async {
     _initializeClient();
     var response = await client.doGet('self/$username');
-    return User.fromJson(_handleResult(response));
+    return User.fromJson(handleResult(response));
   }
 
   /// Request recovery code
   Future requestRecoveryCode(String username) async {
     _initializeClient();
     var response = await client.doGet('recovery/$username');
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Reset password using previously received recovery code
@@ -245,21 +245,21 @@ class ValidicityServerAPI {
     _initializeClient();
     var response =
         await client.doPut('recovery/$username/$code/$password', null);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Get information about a specific user
   Future<User> getUser(String username) async {
     _initializeClient();
     var response = await client.doGet('user/$username');
-    return User.fromJson(_handleResult(response));
+    return User.fromJson(handleResult(response));
   }
 
   /// Get all Users
   Future<List<User>> getUsers() async {
     _initializeClient();
     var response = await client.doGet('user');
-    List list = _handleResult(response);
+    List list = handleResult(response);
     return list.map((map) => User.fromJson(map)).toList();
   }
 
@@ -268,14 +268,14 @@ class ValidicityServerAPI {
       String username, Map<String, dynamic> payload) async {
     _initializeClient();
     var response = await client.doPut('user/$username', payload);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Get all available projects for given userId
   Future<List<Project>> getProjects(int userId) async {
     _initializeClient();
     var response = await client.doGet('user/$userId/project');
-    List list = _handleResult(response);
+    List list = handleResult(response);
     return list.map((map) => Project.fromJson(map)).toList();
   }
 
@@ -283,7 +283,7 @@ class ValidicityServerAPI {
   Future<Map<String, dynamic>> addProjectUser(int project, int user) async {
     _initializeClient();
     var response = await client.doPost('user/$user/project/$project', null);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Remove access to a Project for a User
@@ -294,7 +294,7 @@ class ValidicityServerAPI {
     if (response.statusCode == 200) {
       return {'removed': 1};
     } else {
-      return _handleResult(response);
+      return handleResult(response);
     }
   }
 
@@ -306,7 +306,7 @@ class ValidicityServerAPI {
   Future<List<dynamic>> getSamples() async {
     _initializeClient();
     var response = await client.doGet('project/$currentProjectId/sample');
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Get a single sample by id
@@ -314,7 +314,7 @@ class ValidicityServerAPI {
       {bool includeFirmware = true}) async {
     _initializeClient();
     var response = await client.doGet('sample/$id');
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Find a single Sample by serial number
@@ -322,14 +322,14 @@ class ValidicityServerAPI {
     _initializeClient();
     var response = await client.doGet('project/$currentProjectId/sample/find',
         params: {'serial': serial});
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Create a Sample. Only available to real users.
   Future<Map<String, dynamic>> createSample(Map<String, dynamic> sample) async {
     _initializeClient();
     var response = await client.doPost('sample', sample);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Update a Sample
@@ -337,7 +337,7 @@ class ValidicityServerAPI {
       int id, Map<String, dynamic> sample) async {
     _initializeClient();
     var response = await client.doPut('sample/$id', sample);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Add a Sample to the current Project
@@ -345,7 +345,7 @@ class ValidicityServerAPI {
     _initializeClient();
     var response =
         await client.doPost('project/$currentProjectId/sample/$sample', null);
-    return _handleResult(response);
+    return handleResult(response);
   }
 
   /// Removes a Sample from a Project but does not delete it.
@@ -357,7 +357,7 @@ class ValidicityServerAPI {
     if (response.statusCode == 200) {
       return {'removed': 1};
     } else {
-      return _handleResult(response);
+      return handleResult(response);
     }
   }
 
@@ -369,7 +369,7 @@ class ValidicityServerAPI {
     if (response.statusCode == 200) {
       return {'deleted': 1};
     } else {
-      return _handleResult(response);
+      return handleResult(response);
     }
   }
 }
