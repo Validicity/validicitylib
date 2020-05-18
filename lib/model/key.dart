@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ed25519_dart/ed25519_dart.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:validicitylib/model/block.dart';
 import 'package:validicitylib/config.dart';
@@ -43,10 +44,12 @@ String saveKey() {
   return f.path;
 }
 
-bool verifySignature(String signature, String hash, String publicKey) {
+bool verify(String signature, String hash, String publicKey) {
   print("Sig: $signature Hash: $hash Key: $publicKey");
-  return Signature.detachedVerify(NanoHelpers.hexToBytes(hash),
-      NanoHelpers.hexToBytes(signature), NanoHelpers.hexToBytes(publicKey));
+  return verifySignature(NanoHelpers.hexToBytes(signature),
+      NanoHelpers.hexToBytes(hash), NanoHelpers.hexToBytes(publicKey));
+  /*return Signature.detachedVerify(NanoHelpers.hexToBytes(hash),
+      NanoHelpers.hexToBytes(signature), NanoHelpers.hexToBytes(publicKey));*/
 }
 
 /*
