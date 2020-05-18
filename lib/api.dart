@@ -329,7 +329,7 @@ class ValidicityServerAPI {
     _initializeClient();
     var json = sample.toJson();
     print("Submitting $json");
-    var response = await client.doPost('sample/submit/$sample', json);
+    var response = await client.doPost('sample/submit/${sample.serial}', json);
     return handleResult(response);
   }
 }
