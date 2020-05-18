@@ -310,8 +310,7 @@ class ValidicityServerAPI {
   }
 
   /// Get a single sample by id
-  Future<Map<String, dynamic>> getSample(int id,
-      {bool includeFirmware = true}) async {
+  Future<Map<String, dynamic>> getSample(int id) async {
     _initializeClient();
     var response = await client.doGet('sample/$id');
     return handleResult(response);
@@ -320,56 +319,14 @@ class ValidicityServerAPI {
   /// Find a single Sample by serial number
   Future<Map<String, dynamic>> findSample(String serial) async {
     _initializeClient();
-    var response = await client.doGet('project/$currentProjectId/sample/find',
-        params: {'serial': serial});
+    var response = await client.doGet('sample/find/$serial');
     return handleResult(response);
   }
 
-  /// Create a Sample. Only available to real users.
-  Future<Map<String, dynamic>> createSample(Map<String, dynamic> sample) async {
+  /// Submit a Sample.
+  Future<Map<String, dynamic>> submitSample(Map<String, dynamic> sample) async {
     _initializeClient();
-    var response = await client.doPost('sample', sample);
+    var response = await client.doPost('sample/submit/$sample', sample);
     return handleResult(response);
-  }
-
-  /// Update a Sample
-  Future<Map<String, dynamic>> updateSample(
-      int id, Map<String, dynamic> sample) async {
-    _initializeClient();
-    var response = await client.doPut('sample/$id', sample);
-    return handleResult(response);
-  }
-
-  /// Add a Sample to the current Project
-  Future<Map<String, dynamic>> addSample(int sample) async {
-    _initializeClient();
-    var response =
-        await client.doPost('project/$currentProjectId/sample/$sample', null);
-    return handleResult(response);
-  }
-
-  /// Removes a Sample from a Project but does not delete it.
-  /// Returns {'removed': 1} on success.
-  Future<Map<String, dynamic>> removeSample(int sample) async {
-    _initializeClient();
-    var response =
-        await client.doDelete('project/$currentProjectId/sample/$sample');
-    if (response.statusCode == 200) {
-      return {'removed': 1};
-    } else {
-      return handleResult(response);
-    }
-  }
-
-  /// Deletes a Sample, not normally used.
-  /// Returns {'deleted': 1} on success.
-  Future<Map<String, dynamic>> deleteSample(int id) async {
-    _initializeClient();
-    var response = await client.doDelete('sample/$id');
-    if (response.statusCode == 200) {
-      return {'deleted': 1};
-    } else {
-      return handleResult(response);
-    }
   }
 }
