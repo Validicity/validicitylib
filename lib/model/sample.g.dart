@@ -15,24 +15,26 @@ Sample _$SampleFromJson(Map<String, dynamic> json) {
     ..modified = json['modified'] == null
         ? null
         : DateTime.parse(json['modified'] as String)
-    ..hash = json['hash'] as String
     ..previous = json['previous'] as String
-    ..signature = json['signature'] as String
     ..publicKey = json['publicKey'] as String
     ..serial = json['serial'] as String
-    ..state = _$enumDecodeNullable(_$SampleStateEnumMap, json['state']);
+    ..hash = json['hash'] as String
+    ..signature = json['signature'] as String
+    ..state = _$enumDecodeNullable(_$SampleStateEnumMap, json['state'])
+    ..metadata = json['metadata'] as Map<String, dynamic>;
 }
 
 Map<String, dynamic> _$SampleToJson(Sample instance) => <String, dynamic>{
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
       'modified': instance.modified?.toIso8601String(),
-      'hash': instance.hash,
       'previous': instance.previous,
-      'signature': instance.signature,
       'publicKey': instance.publicKey,
       'serial': instance.serial,
+      'hash': instance.hash,
+      'signature': instance.signature,
       'state': _$SampleStateEnumMap[instance.state],
+      'metadata': instance.metadata,
     };
 
 T _$enumDecode<T>(

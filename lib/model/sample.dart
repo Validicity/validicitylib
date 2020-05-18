@@ -36,6 +36,8 @@ class Sample extends Block {
   // @Column(defaultValue: "'registered'")
   SampleState state = SampleState.registered;
 
+  Map<String, dynamic> metadata = {};
+
   Sample() {}
 
   factory Sample.fromJson(Map<String, dynamic> json) => _$SampleFromJson(json);
