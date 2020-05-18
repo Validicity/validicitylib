@@ -43,6 +43,11 @@ String saveKey() {
   return f.path;
 }
 
+bool verifySignature(String signature, String hash, String publicKey) {
+  return Signature.detachedVerify(NanoHelpers.hexToBytes(hash),
+      NanoHelpers.hexToBytes(signature), NanoHelpers.hexToBytes(publicKey));
+}
+
 /*
     // Encrypting and decrypting a seed
     Uint8List encrypted = NanoCrypt.encrypt(seed, 'thisisastrongpassword');
