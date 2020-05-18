@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:validicitylib/error.dart';
 import 'package:validicitylib/model/project.dart';
+import 'package:validicitylib/model/sample.dart';
 import 'package:validicitylib/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:validicitylib/rest.dart';
@@ -324,9 +325,10 @@ class ValidicityServerAPI {
   }
 
   /// Submit a Sample.
-  Future<Map<String, dynamic>> submitSample(Map<String, dynamic> sample) async {
+  Future<Map<String, dynamic>> submitSample(Sample sample) async {
     _initializeClient();
-    var response = await client.doPost('sample/submit/$sample', sample);
+    var json = sample.toJson();
+    var response = await client.doPost('sample/submit/$sample', json);
     return handleResult(response);
   }
 }
