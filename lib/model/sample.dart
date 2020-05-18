@@ -34,7 +34,7 @@ class Sample extends Block {
 
   /// The current state of the Sample's lifecycle
   // @Column(defaultValue: "'registered'")
-  SampleState state;
+  SampleState state = SampleState.registered;
 
   Sample() {}
 
