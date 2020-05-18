@@ -328,6 +328,7 @@ class ValidicityServerAPI {
   Future<Map<String, dynamic>> submitSample(Sample sample) async {
     _initializeClient();
     var json = sample.toJson();
+    print("Submitting $json");
     var response = await client.doPost('sample/submit/$sample', json);
     return handleResult(response);
   }
