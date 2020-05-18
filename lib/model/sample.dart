@@ -66,16 +66,17 @@ class Sample extends Block {
 
   /// Convert all parts into bytes and then make a Blake2b hash.
   String calculateHash() {
-    Uint8List idBytes = intToBytes(id);
+    /* Uint8List idBytes = intToBytes(id);
     Uint8List createdBytes = datetimeToBytes(created);
     Uint8List modifiedBytes = datetimeToBytes(modified);
+    */
     Uint8List previousBytes = NanoHelpers.hexToBytes(previous.padLeft(64, "0"));
     Uint8List publicKeyBytes = NanoHelpers.hexToBytes(publicKey);
     Uint8List serialBytes = NanoHelpers.stringToBytesUtf8(serial);
     hash = NanoHelpers.byteToHex(Blake2b.digest256([
-      idBytes,
+      /* idBytes,
       createdBytes,
-      modifiedBytes,
+      modifiedBytes,*/
       publicKeyBytes,
       previousBytes,
       serialBytes
