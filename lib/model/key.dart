@@ -44,6 +44,7 @@ String saveKey() {
 }
 
 bool verifySignature(String signature, String hash, String publicKey) {
+  print("Sig: $signature Hash: $hash Key: $publicKey");
   return Signature.detachedVerify(NanoHelpers.hexToBytes(hash),
       NanoHelpers.hexToBytes(signature), NanoHelpers.hexToBytes(publicKey));
 }
