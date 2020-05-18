@@ -46,6 +46,7 @@ String saveKey() {
 
 bool verify(String signature, String hash, String publicKey) {
   print("Sig: $signature Hash: $hash Key: $publicKey");
+  setDigestIdentifier('Blake2b');
   return verifySignature(NanoHelpers.hexToBytes(signature),
       NanoHelpers.hexToBytes(hash), NanoHelpers.hexToBytes(publicKey));
   /*return Signature.detachedVerify(NanoHelpers.hexToBytes(hash),
@@ -71,11 +72,13 @@ class Key {
 
   /// Signing a block
   signBlock(Block block) {
+    setDigestIdentifier('Blake2b');
     block.signature = NanoHelpers.byteToHex(sign(
             NanoHelpers.hexToBytes(block.calculateHash()),
             NanoHelpers.hexToBytes(privateKey),
             NanoHelpers.hexToBytes(publicKey)))
         .toUpperCase();
+    print(block.signature);
     //NanoSignatures.signBlock(block.calculateHash(), privateKey);
   }
 
