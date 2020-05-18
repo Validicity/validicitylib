@@ -44,7 +44,11 @@ class Sample extends Block {
 
   /// Seal this Sample by adding previous hash and signing it.
   seal(Key key, Sample previousSample) {
-    previous = previousSample.hash;
+    if (previousSample != null) {
+      previous = previousSample.hash;
+    } else {
+      previous = "00"; // TODO: Root of project!
+    }
     sign(key);
   }
 
