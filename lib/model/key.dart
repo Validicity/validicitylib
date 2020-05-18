@@ -52,15 +52,6 @@ bool verify(String signature, String hash, String publicKey) {
       NanoHelpers.hexToBytes(signature), NanoHelpers.hexToBytes(publicKey));*/
 }
 
-/*
-    // Encrypting and decrypting a seed
-    Uint8List encrypted = NanoCrypt.encrypt(seed, 'thisisastrongpassword');
-    // String representation:
-    String encryptedSeedHex = NanoHelpers.byteToHex(encrypted);
-    // Decrypting (if incorrect password, will throw an exception)
-    Uint8List decrypted = NanoCrypt.decrypt(
-        NanoHelpers.hexToBytes(encryptedSeedHex), 'thisisastrongpassword');
-*/
 @JsonSerializable()
 class Key {
   String seed;
@@ -80,8 +71,12 @@ class Key {
 
   /// Signing a block
   signBlock(Block block) {
-    block.signature =
-        NanoSignatures.signBlock(block.calculateHash(), privateKey);
+    block.signature = NanoHelpers.byteToHex(sign(
+            NanoHelpers.hexToBytes(block.calculateHash()),
+            NanoHelpers.hexToBytes(privateKey),
+            NanoHelpers.hexToBytes(publicKey)))
+        .toUpperCase();
+    //NanoSignatures.signBlock(block.calculateHash(), privateKey);
   }
 
   factory Key.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
