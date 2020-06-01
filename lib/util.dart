@@ -6,14 +6,11 @@ enum UserType { admin, client, user, superuser }
 
 /// The different LifeCycle states of a Sample.
 enum SampleState {
-  /// Sample is registered but unused
+  /// Sample is registered
   registered,
 
-  /// Sample is assigned to a Project
-  assigned,
-
-  /// Sample is in use
-  used,
+  /// Sample is being analysed
+  analysed,
 
   /// Sample is destructed
   destructed
