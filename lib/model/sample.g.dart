@@ -71,7 +71,6 @@ T _$enumDecodeNullable<T>(
 
 const _$SampleStateEnumMap = {
   SampleState.registered: 'registered',
-  SampleState.assigned: 'assigned',
-  SampleState.used: 'used',
+  SampleState.analysed: 'analysed',
   SampleState.destructed: 'destructed',
 };

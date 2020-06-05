@@ -299,6 +299,14 @@ class ValidicityServerAPI {
     }
   }
 
+  /// Get all users with access to project with given id
+  Future<List<Project>> getProjectUsers(int projectId) async {
+    _initializeClient();
+    var response = await client.doGet('project/$projectId/users');
+    List list = handleResult(response);
+    return list.map((map) => Project.fromJson(map)).toList();
+  }
+
   ///
   /// Samples
   ///
