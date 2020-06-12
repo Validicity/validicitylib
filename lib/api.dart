@@ -91,7 +91,7 @@ class ValidicityServerAPI {
   http.Response Function(http.Response response) responseHandler;
 
   // We try to request all scopes
-  List<String> scopes = ['admin', 'validicityclient', 'user'];
+  List<String> scopes = ['admin', 'client', 'superuser', 'user'];
 
   void set server(String name) {
     _server = name;
@@ -227,11 +227,19 @@ class ValidicityServerAPI {
     return handleResult(response);
   }
 
-  /// Get information about myself, my own user
-  Future<User> getMyself(String username) async {
+  /// Get information about myself
+  Future<User> getMyself() async {
     _initializeClient();
-    var response = await client.doGet('self/$username');
+    var response = await client.doGet('self');
     return User.fromJson(handleResult(response));
+  }
+
+  /// Get all Projects I can access
+  Future<List<Project>> getMyProjects() async {
+    _initializeClient();
+    var response = await client.doGet('self/project');
+    List list = handleResult(response);
+    return list.map((map) => Project.fromJson(map)).toList();
   }
 
   /// Request recovery code
