@@ -320,24 +320,25 @@ class ValidicityServerAPI {
   ///
 
   /// Get all Samples in the current Project
-  Future<List<dynamic>> getSamples() async {
+  Future<List<Sample>> getSamples() async {
     _initializeClient();
     var response = await client.doGet('project/$currentProjectId/sample');
-    return handleResult(response);
+    List list = handleResult(response);
+    return list.map((map) => Sample.fromJson(map)).toList();
   }
 
   /// Get a single sample by id
-  Future<Map<String, dynamic>> getSample(int id) async {
+  Future<Sample> getSample(int id) async {
     _initializeClient();
     var response = await client.doGet('sample/$id');
-    return handleResult(response);
+    return Sample.fromJson(handleResult(response));
   }
 
   /// Find a single Sample by serial number
-  Future<Map<String, dynamic>> findSample(String serial) async {
+  Future<Sample> findSample(String serial) async {
     _initializeClient();
     var response = await client.doGet('sample/find/$serial');
-    return handleResult(response);
+    return Sample.fromJson(handleResult(response));
   }
 
   /// Submit a Sample.
