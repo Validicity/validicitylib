@@ -1,9 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nanodart/nanodart.dart';
-import 'package:validicitylib/model/key.dart';
-import 'package:validicitylib/util.dart';
 
 part 'proof.g.dart';
 
