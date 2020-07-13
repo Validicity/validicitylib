@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:validicitylib/error.dart';
 import 'package:validicitylib/model/project.dart';
+import 'package:validicitylib/model/proof.dart';
 import 'package:validicitylib/model/sample.dart';
 import 'package:validicitylib/model/user.dart';
 import 'package:http/http.dart' as http;
@@ -356,5 +357,40 @@ class ValidicityServerAPI {
     print("Submitting $json");
     var response = await client.doPost('sample/submit/${sample.serial}', json);
     return handleResult(response);
+  }
+
+  ///
+  /// Proofs
+  ///
+
+  /// Validate a Proof
+  Future<Map<String, dynamic>> validateProof(String proof) async {
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+    var uri = 'http://18.191.50.129/verify';
+    var body = json.encode({
+      "proofs": [proof]
+    });
+    print("Validating proof");
+    var response = await http.post(uri, body: body, headers: headers);
+    if (response.statusCode == 200) {
+      var list = json.decode(response.body);
+      print(list.toString());
+      var anchors = list.first['anchors'];
+      for (var anc in anchors) {
+        var type = anc["type"];
+        var valid = anc["valid"];
+        if (valid) {
+          print("Anchor $type is valid");
+        } else {
+          print("Anchor $type is not yet valid");
+        }
+      }
+    } else {
+      print("Verification failed");
+    }
+    //return handleResult(response);
   }
 }
