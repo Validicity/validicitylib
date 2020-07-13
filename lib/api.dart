@@ -334,6 +334,14 @@ class ValidicityServerAPI {
     return Sample.fromJson(handleResult(response));
   }
 
+  /// Get a full sample chain by serial number
+  Future<List<Sample>> getChain(String serial) async {
+    _initializeClient();
+    var response = await client.doGet('chain/$serial');
+    List list = handleResult(response);
+    return list.map((map) => Sample.fromJson(map)).toList();
+  }
+
   /// Find a single Sample by serial number
   Future<Sample> findSample(String serial) async {
     _initializeClient();

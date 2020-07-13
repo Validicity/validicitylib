@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:validicitylib/model/block.dart';
 import 'package:validicitylib/model/key.dart';
+import 'package:validicitylib/model/proof.dart';
 import 'package:validicitylib/util.dart';
 
 part 'sample.g.dart';
@@ -37,6 +38,8 @@ class Sample extends Block {
   SampleState state = SampleState.registered;
 
   Map<String, dynamic> metadata = {};
+
+  Proof proof;
 
   Sample() {}
 

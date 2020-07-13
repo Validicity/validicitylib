@@ -17,6 +17,9 @@ Proof _$ProofFromJson(Map<String, dynamic> json) {
         : DateTime.parse(json['modified'] as String)
     ..proofId = json['proofId'] as String
     ..hash = json['hash'] as String
+    ..proof = json['proof'] as String
+    ..cal = json['cal'] as bool
+    ..btc = json['btc'] as bool
     ..metadata = json['metadata'] as Map<String, dynamic>;
 }
 
@@ -26,5 +29,8 @@ Map<String, dynamic> _$ProofToJson(Proof instance) => <String, dynamic>{
       'modified': instance.modified?.toIso8601String(),
       'proofId': instance.proofId,
       'hash': instance.hash,
+      'proof': instance.proof,
+      'cal': instance.cal,
+      'btc': instance.btc,
       'metadata': instance.metadata,
     };
