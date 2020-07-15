@@ -328,6 +328,14 @@ class ValidicityServerAPI {
     return list.map((map) => Sample.fromJson(map)).toList();
   }
 
+  /// Get all last Samples in the current Project
+  Future<List<Sample>> getLastSamples() async {
+    _initializeClient();
+    var response = await client.doGet('project/$currentProjectId/lastsample');
+    List list = handleResult(response);
+    return list.map((map) => Sample.fromJson(map)).toList();
+  }
+
   /// Get a single sample by id
   Future<Sample> getSample(int id) async {
     _initializeClient();
@@ -347,7 +355,8 @@ class ValidicityServerAPI {
   Future<Sample> findSample(String serial) async {
     _initializeClient();
     var response = await client.doGet('sample/find/$serial');
-    return Sample.fromJson(handleResult(response));
+    var json = handleResult(response);
+    return (json == null) ? null : Sample.fromJson(json);
   }
 
   /// Submit a Sample.
