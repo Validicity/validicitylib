@@ -15,7 +15,6 @@ dependencies:
   mqtt_client: ^7.2.1
   oauth2: ^1.6.1
   json_annotation: ^3.0.0
-  hive: ^1.4.1
   nanodart: ^1.0.0
   # Had to add these since signature verification failed in nanodart
   ed25519_dart:
@@ -25,7 +24,6 @@ dependencies:
   
 dev_dependencies:
   build_runner: ^1.10.0
-  hive_generator: ^0.7.0
   test: ^1.15.1
   # aqueduct_test is nice for doing http test code
   aqueduct_test:

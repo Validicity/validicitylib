@@ -1,14 +1,13 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+import 'package:json_annotation/json_annotation.dart';
 import 'package:validicitylib/error.dart';
 import 'package:validicitylib/model/project.dart';
-import 'package:validicitylib/model/proof.dart';
 import 'package:validicitylib/model/sample.dart';
 import 'package:validicitylib/model/user.dart';
-import 'package:http/http.dart' as http;
 import 'package:validicitylib/rest.dart';
 import 'package:validicitylib/util.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'api.g.dart';
 
