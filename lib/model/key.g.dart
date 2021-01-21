@@ -6,14 +6,14 @@ part of 'key.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Key _$KeyFromJson(Map<String, dynamic> json) {
-  return Key()
+KeyPair _$KeyFromJson(Map<String, dynamic> json) {
+  return KeyPair()
     ..seed = json['seed'] as String
     ..publicKey = json['publicKey'] as String
     ..privateKey = json['privateKey'] as String;
 }
 
-Map<String, dynamic> _$KeyToJson(Key instance) => <String, dynamic>{
+Map<String, dynamic> _$KeyToJson(KeyPair instance) => <String, dynamic>{
       'seed': instance.seed,
       'publicKey': instance.publicKey,
       'privateKey': instance.privateKey,

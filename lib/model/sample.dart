@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nanodart/nanodart.dart';
+import 'package:nanodart/nanodart.dart' as nano;
 import 'package:validicitylib/model/block.dart';
 import 'package:validicitylib/model/key.dart';
 import 'package:validicitylib/model/proof.dart';
+import 'package:validicitylib/model/user.dart';
 import 'package:validicitylib/util.dart';
 
 part 'sample.g.dart';
@@ -41,14 +42,15 @@ class Sample extends Block {
 
   Proof proof;
 
-  Sample() {}
+  User user;
 
+  Sample();
   factory Sample.fromJson(Map<String, dynamic> json) => _$SampleFromJson(json);
 
   Map<String, dynamic> toJson() => _$SampleToJson(this);
 
   /// Seal this Sample by adding previous hash and signing it.
-  seal(Key key, Sample previousSample) {
+  seal(KeyPair key, Sample previousSample) {
     if (previousSample != null) {
       previous = previousSample.hash;
     } else {
@@ -58,7 +60,7 @@ class Sample extends Block {
   }
 
   /// Sign this Sample by recording the publicKey of the signing key and then adding the signature.
-  sign(Key key) {
+  sign(KeyPair key) {
     publicKey = key.publicKey;
     key.signBlock(this);
   }
@@ -79,10 +81,11 @@ class Sample extends Block {
     Uint8List createdBytes = datetimeToBytes(created);
     Uint8List modifiedBytes = datetimeToBytes(modified);
     */
-    Uint8List previousBytes = NanoHelpers.hexToBytes(previous.padLeft(64, "0"));
-    Uint8List publicKeyBytes = NanoHelpers.hexToBytes(publicKey);
-    Uint8List serialBytes = NanoHelpers.stringToBytesUtf8(serial);
-    hash = NanoHelpers.byteToHex(Blake2b.digest256([
+    Uint8List previousBytes =
+        nano.NanoHelpers.hexToBytes(previous.padLeft(64, "0"));
+    Uint8List publicKeyBytes = nano.NanoHelpers.hexToBytes(publicKey);
+    Uint8List serialBytes = nano.NanoHelpers.stringToBytesUtf8(serial);
+    hash = nano.NanoHelpers.byteToHex(nano.Blake2b.digest256([
       /* idBytes,
       createdBytes,
       modifiedBytes,*/

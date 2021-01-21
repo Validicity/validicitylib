@@ -20,6 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['modified'] as String)
     ..type = _$enumDecodeNullable(_$UserTypeEnumMap, json['type'])
+    ..avatar = json['avatar'] as String
     ..userProjects = User.flatten(json['userProjects'] as List);
 }
 
@@ -31,6 +32,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'created': instance.created?.toIso8601String(),
       'modified': instance.modified?.toIso8601String(),
       'type': _$UserTypeEnumMap[instance.type],
+      'avatar': instance.avatar,
       'userProjects': instance.userProjects,
     };
 

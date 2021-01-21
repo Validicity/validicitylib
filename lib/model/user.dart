@@ -22,6 +22,8 @@ class User {
 
   UserType type;
 
+  String avatar;
+
   /// Last created Recovery code
   // int lastCode; Should never be on client side!
 

@@ -9,7 +9,7 @@ void main() {
   });
 
   test("signing should work", () async {
-    var k = Key()
+    var k = KeyPair()
       ..publicKey =
           "7C22105B5CB00001B01F86A7A1A54E741BD6099899AA5EF74D25354124355ED6"
       ..privateKey =

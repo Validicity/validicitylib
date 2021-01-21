@@ -12,12 +12,22 @@ part 'key.g.dart';
 
 String keyFile = 'key.json';
 
-Key validicityKey;
+KeyPair validicityKey;
 
 String createKey() {
-  validicityKey = Key();
+  validicityKey = KeyPair();
   validicityKey.create();
   return saveKey();
+}
+
+KeyPair createKeyMobile() {
+  validicityKey = KeyPair();
+  validicityKey.create();
+  return validicityKey;
+}
+
+loadKeyMobile(KeyPair pair) {
+  validicityKey = pair;
 }
 
 loadKey() {
@@ -25,7 +35,7 @@ loadKey() {
   if (f.existsSync()) {
     try {
       var jsonString = f.readAsStringSync();
-      validicityKey = Key.fromJson(json.decode(jsonString));
+      validicityKey = KeyPair.fromJson(json.decode(jsonString));
     } catch (e) {
       print('Failed to parse key file ${f.path} : $e');
       exit(1);
@@ -54,12 +64,12 @@ bool verify(String signature, String hash, String publicKey) {
 }
 
 @JsonSerializable()
-class Key {
+class KeyPair {
   String seed;
   String publicKey;
   String privateKey;
 
-  Key() {}
+  KeyPair() {}
 
   create() {
     // Generating a random seed
@@ -82,7 +92,7 @@ class Key {
     //NanoSignatures.signBlock(block.calculateHash(), privateKey);
   }
 
-  factory Key.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
+  factory KeyPair.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
 
   Map<String, dynamic> toJson() => _$KeyToJson(this);
 }

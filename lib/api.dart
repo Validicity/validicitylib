@@ -83,7 +83,7 @@ class ValidicityServerAPI {
   /// Set current project id, uses in API calls
   int currentProjectId;
 
-  // For example "city.validi.mobile" or "city.validi.client"
+  // For example "city.validi.validicityapp" or "city.validi.client"
   String clientID;
 
   CredentialsHolder credentialsHolder;
