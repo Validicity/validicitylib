@@ -22,6 +22,8 @@ Sample _$SampleFromJson(Map<String, dynamic> json) {
     ..signature = json['signature'] as String
     ..comment = json['comment'] as String
     ..location = json['location'] as String
+    ..latitude = (json['latitude'] as num)?.toDouble()
+    ..longitude = (json['longitude'] as num)?.toDouble()
     ..state = _$enumDecodeNullable(_$SampleStateEnumMap, json['state'])
     ..metadata = json['metadata'] as Map<String, dynamic>
     ..proof = json['proof'] == null
@@ -43,6 +45,8 @@ Map<String, dynamic> _$SampleToJson(Sample instance) => <String, dynamic>{
       'signature': instance.signature,
       'comment': instance.comment,
       'location': instance.location,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
       'state': _$SampleStateEnumMap[instance.state],
       'metadata': instance.metadata,
       'proof': instance.proof,

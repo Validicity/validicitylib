@@ -37,6 +37,8 @@ class Sample extends Block {
   String comment;
 
   String location;
+  double latitude;
+  double longitude;
 
   /// The current state of the Sample's lifecycle
   // @Column(defaultValue: "'registered'")
