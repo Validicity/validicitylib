@@ -34,6 +34,10 @@ class Sample extends Block {
   /// Cryptographic signature of this record.
   String signature;
 
+  String comment;
+
+  String location;
+
   /// The current state of the Sample's lifecycle
   // @Column(defaultValue: "'registered'")
   SampleState state = SampleState.registered;
@@ -62,7 +66,7 @@ class Sample extends Block {
   /// Sign this Sample by recording the publicKey of the signing key and then adding the signature.
   sign(KeyPair key) {
     publicKey = key.publicKey;
-    key.signBlock(this);
+    signature = key.signBlock(this);
   }
 
   Uint8List intToBytes(int n) {

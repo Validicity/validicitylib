@@ -24,6 +24,8 @@ class User {
 
   String avatar;
 
+  String publicKey;
+
   /// Last created Recovery code
   // int lastCode; Should never be on client side!
 
@@ -32,7 +34,7 @@ class User {
   @JsonKey(fromJson: flatten, nullable: true)
   List<Project> userProjects;
 
-  User(this.name, this.email);
+  User({this.name, this.email});
 
   /// Test User type
   bool get isAdmin => type == UserType.admin;

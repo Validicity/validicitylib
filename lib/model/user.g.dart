@@ -8,8 +8,8 @@ part of 'user.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
-    json['name'] as String,
-    json['email'] as String,
+    name: json['name'] as String,
+    email: json['email'] as String,
   )
     ..id = json['id'] as int
     ..username = json['username'] as String
@@ -21,6 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
         : DateTime.parse(json['modified'] as String)
     ..type = _$enumDecodeNullable(_$UserTypeEnumMap, json['type'])
     ..avatar = json['avatar'] as String
+    ..publicKey = json['publicKey'] as String
     ..userProjects = User.flatten(json['userProjects'] as List);
 }
 
@@ -33,6 +34,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'modified': instance.modified?.toIso8601String(),
       'type': _$UserTypeEnumMap[instance.type],
       'avatar': instance.avatar,
+      'publicKey': instance.publicKey,
       'userProjects': instance.userProjects,
     };
 

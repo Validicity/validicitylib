@@ -89,10 +89,12 @@ class KeyPair {
             NanoHelpers.hexToBytes(publicKey)))
         .toUpperCase();
     print(block.signature);
+    return block.signature;
     //NanoSignatures.signBlock(block.calculateHash(), privateKey);
   }
 
-  factory KeyPair.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
+  factory KeyPair.fromJson(Map<String, dynamic> json) =>
+      _$KeyPairFromJson(json);
 
-  Map<String, dynamic> toJson() => _$KeyToJson(this);
+  Map<String, dynamic> toJson() => _$KeyPairToJson(this);
 }

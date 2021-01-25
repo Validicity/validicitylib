@@ -273,12 +273,26 @@ class ValidicityServerAPI {
   }
 
   /// A normal User can only update oneself.
-  Future<Map<String, dynamic>> updateUser(
-      String username, Map<String, dynamic> payload) async {
+  Future<Map<String, dynamic>> updateUser(User user) async {
     _initializeClient();
-    var response = await client.doPut('user/$username', payload);
+    var response = await client.doPut(
+        'user/${user.username}', user.toJson()..remove("id"));
     return handleResult(response);
   }
+
+  /// A normal User can only update oneself.
+  Future<Map<String, dynamic>> updateSelf(User user) async {
+    _initializeClient();
+    var json = user.toJson()..remove("id")..remove("userProjects");
+    var response = await client.doPut('self', json);
+    return handleResult(response);
+  }
+  // Future<Map<String, dynamic>> updateUser(
+  //     String username, Map<String, dynamic> payload) async {
+  //   _initializeClient();
+  //   var response = await client.doPut('user/$username', payload);
+  //   return handleResult(response);
+  // }
 
   /// Get all available projects for given userId
   Future<List<Project>> getProjects(int userId) async {
@@ -361,9 +375,9 @@ class ValidicityServerAPI {
   /// Submit a Sample.
   Future<Map<String, dynamic>> submitSample(Sample sample) async {
     _initializeClient();
-    var json = sample.toJson();
-    print("Submitting $json");
-    var response = await client.doPost('sample/submit/${sample.serial}', json);
+
+    var response = await client.doPost(
+        'sample/submit/${sample.serial}', sample.toJson()..remove("id"));
     return handleResult(response);
   }
 
