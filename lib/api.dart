@@ -157,20 +157,21 @@ class ValidicityServerAPI {
       }
       var contentType = response.headers['content-type'];
       if (contentType != null && contentType.contains('json')) {
+        var result;
         try {
-          var result = json.decode(response.body);
-          if (result is Map) {
-            if (result.containsKey("error")) {
-              throw ValidicityServerException(
-                  serverErrorFromString(result["error"]), result["detail"]);
-            }
-          }
-          return result;
+          result = json.decode(response.body);
         } catch (e) {
           throw ValidicityServerException(
               ValidicityServerError.error_json_parse,
               "Parsing result JSON from API failed: $e");
         }
+        if (result is Map) {
+          if (result.containsKey("error")) {
+            throw ValidicityServerException(
+                serverErrorFromString(result["error"]), result["detail"]);
+          }
+        }
+        return result;
       } else {
         throw ValidicityServerException(ValidicityServerError.error_not_json,
             "API did not return JSON: ${response.body}");
@@ -255,6 +256,18 @@ class ValidicityServerAPI {
     var response =
         await client.doPut('recovery/$username/$code/$password', null);
     return handleResult(response);
+  }
+
+  // User registration
+  Future<User> registerUser(Map<String, dynamic> json) async {
+    _initializeClient();
+    var response = await client.doPost("/register", json, auth: false);
+    var res = handleResult(response);
+    return res == null ? null : User.fromJson(res);
+    // if (response.statusCode == 200) {
+    //   return User.fromJson(handleResult(response));
+    // }
+    // return null;
   }
 
   /// Get information about a specific user
@@ -375,7 +388,7 @@ class ValidicityServerAPI {
   /// Submit a Sample.
   Future<Map<String, dynamic>> submitSample(Sample sample) async {
     _initializeClient();
-
+    var json = sample.toJson()..remove("id");
     var response = await client.doPost(
         'sample/submit/${sample.serial}', sample.toJson()..remove("id"));
     return handleResult(response);
