@@ -1,6 +1,6 @@
 name: validicitylib
 description: A shared library for the Validicity system
-version: 0.1.0
+version: 0.1.1
 homepage: https://www.validicity.com
 author: Göran Krampe <goran.krampe@gmail.com>
 publish_to: none
