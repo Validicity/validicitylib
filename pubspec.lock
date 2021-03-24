@@ -165,9 +165,11 @@ packages:
   ed25519_dart:
     dependency: "direct main"
     description:
-      path: "../../inspiration/ed25519_dart"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: cbc7b8db244db18c8d1790eaffde6b0817fbe016
+      url: "https://github.com/Christian-Martensson/ed25519_dart.git"
+    source: git
     version: "1.0.2"
   event_bus:
     dependency: transitive
@@ -298,9 +300,11 @@ packages:
   nanodart:
     dependency: "direct main"
     description:
-      path: "../../inspiration/nanodart"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: ba26cf863331950e852161a4562b8c607921bfe8
+      url: "https://github.com/Christian-Martensson/nanodart.git"
+    source: git
     version: "1.0.0"
   node_preamble:
     dependency: transitive
