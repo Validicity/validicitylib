@@ -10,7 +10,8 @@ environment:
 
 dependencies:
   ed25519_dart:
-    path: ../../inspiration/ed25519_dart
+    git:
+      url: https://github.com/Christian-Martensson/ed25519_dart.git
     # git:
     #   url: https://github.com/getcanoe/ed25519_dart
     #   ref: master
@@ -21,8 +22,8 @@ dependencies:
   logging: ^1.0.0
   mqtt_client: ^9.0.0
   nanodart:
-    path: ../../inspiration/nanodart
-  # nanodart: ^1.0.0
+    git:
+      url: https://github.com/Christian-Martensson/nanodart.git
   oauth2: ^2.0.0
 
 dev_dependencies:
