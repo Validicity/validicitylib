@@ -38,7 +38,7 @@ configure(String appName, String yaml, String filename) {
         var yamlContent = f.readAsStringSync();
         config = checkedYamlDecode(
             yamlContent, (m) => ValidicitylibConfiguration.fromJson(m),
-            sourceUrl: f.path);
+            sourceUrl: Uri.tryParse(f.path));
         config.path = f.path;
       } catch (e) {
         print('Failed to parse config file ${f.path} : $e');

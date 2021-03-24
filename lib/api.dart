@@ -404,7 +404,7 @@ class ValidicityServerAPI {
       'Content-type': 'application/json',
       'Accept': 'application/json',
     };
-    var uri = 'http://18.191.50.129/verify';
+    var uri = Uri.tryParse('http://18.191.50.129/verify');
     var body = json.encode({
       "proofs": [proof]
     });

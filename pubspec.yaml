@@ -10,23 +10,26 @@ environment:
 
 dependencies:
   ed25519_dart:
-    git:
-      url: https://github.com/getcanoe/ed25519_dart
-      ref: master
-  args: ^1.6.0
-  checked_yaml: ^1.0.2
-  http: ^0.12.0+4
-  json_annotation: ^3.0.0
-  logging: ^0.11.4
-  mqtt_client: ^7.2.1
-  nanodart: ^1.0.0
-  oauth2: ^1.6.1
+    path: ../../inspiration/ed25519_dart
+    # git:
+    #   url: https://github.com/getcanoe/ed25519_dart
+    #   ref: master
+  args: ^2.0.0
+  checked_yaml: ^1.0.4
+  http: ^0.13.1
+  json_annotation: ^4.0.1
+  logging: ^1.0.0
+  mqtt_client: ^9.0.0
+  nanodart:
+    path: ../../inspiration/nanodart
+  # nanodart: ^1.0.0
+  oauth2: ^2.0.0
 
 dev_dependencies:
-  aqueduct_test:
-    git:
-      url: git://github.com/gokr/aqueduct.git
-      path: aqueduct_test
-  build_runner: ^1.10.0
-  json_serializable: ^3.0.0
+  # aqueduct_test:
+  #   git:
+  #     url: git://github.com/gokr/aqueduct.git
+  #     path: aqueduct_test
+  build_runner: ^1.12.2
+  json_serializable: ^4.1.0
   test: ^1.15.1
